@@ -32,12 +32,23 @@ function App() {
         setTodoList(newTodoList);
     };
 
+    const removeTodo = (id) => {
+        const index = todoList.findIndex((element) => {
+            return element.id === id;
+        });
+        if (index !== -1) {
+            const cloneTodoList = [...todoList];
+            cloneTodoList.splice(index, 1);
+            setTodoList(cloneTodoList);
+        }
+    };
+
     return (
         <div className="container max-w-xs pt-5">
             <TodoInput createTodo={createTodo} />
             <Filter />
             <PageLimit />
-            <TodoList todoList={todoList} />
+            <TodoList todoList={todoList} removeTodo={removeTodo} />
             <Pagination />
         </div>
     );

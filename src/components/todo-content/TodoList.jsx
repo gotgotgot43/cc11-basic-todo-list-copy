@@ -6,7 +6,13 @@ function TodoList(props) {
     return (
         <ul className="list-group shadow mt-4">
             {todoList.map((element) => (
-                <Todo key={element.id} title={element.title} completed={element.completed} />
+                <Todo
+                    key={element.id}
+                    title={element.title}
+                    id={element.id}
+                    completed={element.completed}
+                    removeTodo={props.removeTodo}
+                />
             ))}
             {/* <Todo title="Homework" completed={true} />
             <Todo title="Personal project figma" completed={false} />
