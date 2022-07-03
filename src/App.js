@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Filter from './components/filter/Filter';
+import PageLimit from './components/pagelimit/PageLimit';
+import Pagination from './components/pagination/Pagination';
+import TodoList from './components/todo-content/TodoList';
+import TodoInput from './components/todo-content/TodoInput';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="container max-w-xs pt-5">
+            <TodoInput />
+            <Filter />
+            <PageLimit />
+            <TodoList />
+            <Pagination />
+        </div>
+    );
 }
 
 export default App;
