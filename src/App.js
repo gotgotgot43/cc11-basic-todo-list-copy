@@ -35,10 +35,10 @@ function App() {
     return (
         <div className="container max-w-xs pt-5">
             <TodoInput createTodo={createTodo} />
-            <Filter />
+            {/* <Filter />
             <PageLimit />
             <TodoList todoList={todoList} />
-            <Pagination />
+            <Pagination /> */}
         </div>
     );
 }
