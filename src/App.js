@@ -20,8 +20,12 @@ const initialTodoList = [
 
 // console.log(initialTodoList);
 
+// All => null
+// COMPLETED => true
+// PENDING => false
 function App() {
     const [todoList, setTodoList] = useState(initialTodoList);
+    const [searchStatus, setSearchStatus] = useState(null);
 
     const createTodo = (title) => {
         const newTodo = { title, completed: false, id: uuidv4() };
@@ -56,12 +60,38 @@ function App() {
         }
     };
 
+    const changeSearchStatus = (value) => {
+        setSearchStatus(value);
+    };
+
+    // let filterdTodoList = [];
+    // switch (searchStatus) {
+    //     case 'COMPLETED': {
+    //         filterdTodoList = todoList.filter((ele) => ele.completed);
+    //         break;
+    //     }
+    //     case 'PENDING': {
+    //         filterdTodoList = todoList.filter((ele) => !ele.completed);
+    //         break;
+    //     }
+    //     default:
+    //         filterdTodoList = [...todoList];
+    // }
+
+    //To filter only all ,completed or pending
+    const filterdTodoList = todoList.filter(
+        (ele) => searchStatus === null || ele.completed === searchStatus
+    );
+
+    //To filter only including letter
+    // const filterdTodoList = todoList.filter((ele) => ele.title.includes('i'));
+
     return (
         <div className="container max-w-xs pt-5">
             <TodoInput createTodo={createTodo} />
-            <Filter />
+            <Filter changeSearchStatus={changeSearchStatus} searchStatus={searchStatus} />
             <PageLimit />
-            <TodoList todoList={todoList} removeTodo={removeTodo} updateTodo={updateTodo} />
+            <TodoList todoList={filterdTodoList} removeTodo={removeTodo} updateTodo={updateTodo} />
             <Pagination />
         </div>
     );
