@@ -43,12 +43,25 @@ function App() {
         }
     };
 
+    //newValue: {title:,completed}
+    //updateTodo({title:'Meeting'},"w2djigji32")
+    const updateTodo = (newValue, id) => {
+        const index = todoList.findIndex((ele) => ele.id === id);
+        if (index !== -1) {
+            const cloneTodoList = [...todoList];
+            cloneTodoList[index] = { ...cloneTodoList[index], ...newValue }; //{title,id}
+            //{title:'Entertain', completed:true, id:uuidv4()} merge {title:'Meeting}
+            //{title:'Meeting', completed:true, id:uuidv4()}
+            setTodoList(cloneTodoList);
+        }
+    };
+
     return (
         <div className="container max-w-xs pt-5">
             <TodoInput createTodo={createTodo} />
             <Filter />
             <PageLimit />
-            <TodoList todoList={todoList} removeTodo={removeTodo} />
+            <TodoList todoList={todoList} removeTodo={removeTodo} updateTodo={updateTodo} />
             <Pagination />
         </div>
     );

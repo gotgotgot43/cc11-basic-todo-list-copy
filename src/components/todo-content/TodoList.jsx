@@ -12,6 +12,7 @@ function TodoList(props) {
                     id={element.id}
                     completed={element.completed}
                     removeTodo={props.removeTodo}
+                    updateTodo={props.updateTodo}
                 />
             ))}
             {/* <Todo title="Homework" completed={true} />

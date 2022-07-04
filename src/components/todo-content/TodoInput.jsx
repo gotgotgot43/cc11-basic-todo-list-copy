@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '../UI/Button';
 // Fragment React.Fragment
 function TodoInput(props) {
-    const [todoinput, setTodoInput] = useState('');
+    const [todoinput, setTodoInput] = useState(props.title || '');
     const [todoError, setTodoError] = useState('');
 
     const handleClick = () => {
@@ -12,6 +12,15 @@ function TodoInput(props) {
             props.createTodo(todoinput);
             setTodoError('');
             setTodoInput('');
+        }
+    };
+
+    const handleClickUpdateBtn = () => {
+        if (!todoinput) {
+            setTodoError('Title is required');
+        } else {
+            props.updateTodo({ title: todoinput }, props.id);
+            props.closeEditing();
         }
     };
 
@@ -26,10 +35,26 @@ function TodoInput(props) {
                     value={todoinput}
                     onChange={(event) => setTodoInput(event.target.value)}
                 />
-                <Button color="success" onClick={handleClick}>
-                    <i className="fa-solid fa-plus"></i>
-                </Button>
-                <Button color="outline-secondary" onClick={() => setTodoInput('')}>
+                {props.id ? (
+                    <Button color="primary" onClick={handleClickUpdateBtn}>
+                        <i className="fa-solid fa-check"></i>
+                    </Button>
+                ) : (
+                    <Button color="success" onClick={handleClick}>
+                        <i className="fa-solid fa-plus"></i>
+                    </Button>
+                )}
+
+                <Button
+                    color="outline-secondary"
+                    onClick={() => {
+                        if (props.id) {
+                            props.closeEditing();
+                        } else {
+                            setTodoInput('');
+                        }
+                    }}
+                >
                     <i className="fa-solid fa-xmark"></i>
                 </Button>
             </div>
